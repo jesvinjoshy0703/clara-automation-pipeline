@@ -1,0 +1,15 @@
+Customer Name: Rapid Response HVAC
+
+Product: Clara Answering Agent
+
+Business Type:
+Commercial HVAC repair and maintenance.
+
+Location:
+San Antonio, Texas
+
+Emergency Calls:
+AC failure during extreme temperatures.
+
+Goal:
+AI answering agent should capture HVAC emergency calls and dispatch technicians.

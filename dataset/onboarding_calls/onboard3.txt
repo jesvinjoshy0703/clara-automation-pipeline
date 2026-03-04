@@ -1,0 +1,15 @@
+Customer Name: SafeSprinkler Systems
+
+Product: Clara Answering Agent
+
+Business Type:
+Commercial sprinkler installation and repair.
+
+Location:
+Houston, Texas
+
+Emergency Calls:
+Broken sprinkler heads or active water leaks.
+
+Goal:
+AI answering agent should capture emergency sprinkler service calls and schedule technician visits.

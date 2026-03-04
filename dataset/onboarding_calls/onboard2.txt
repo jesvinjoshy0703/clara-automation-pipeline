@@ -1,0 +1,15 @@
+Customer Name: Metro Electrical Services
+
+Product: Clara Answering Agent
+
+Business Type:
+Electrical maintenance and facility support.
+
+Location:
+Austin, Texas
+
+Emergency Calls:
+Power outages or exposed wiring issues.
+
+Goal:
+Use Clara AI answering agent to capture service requests and emergency electrical issues from customers.

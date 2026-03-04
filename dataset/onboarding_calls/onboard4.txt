@@ -1,0 +1,15 @@
+Customer Name: FireShield Contractors
+
+Product: Clara Answering Agent
+
+Business Type:
+Fire alarm installation and inspection services.
+
+Location:
+Phoenix, Arizona
+
+Emergency Calls:
+Alarm systems triggering unexpectedly or system failure.
+
+Goal:
+Use Clara AI to answer calls and record fire alarm service requests.

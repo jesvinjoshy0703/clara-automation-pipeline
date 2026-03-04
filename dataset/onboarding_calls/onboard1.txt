@@ -1,0 +1,15 @@
+Customer Name: Ben's Electric
+
+Product: Clara Answering Agent
+
+Business Type:
+Electrical repair and installation services for residential and commercial customers.
+
+Services Provided:
+Electrical troubleshooting, wiring repairs, installations, and maintenance.
+
+Emergency Calls:
+Power outages, electrical faults, or urgent repair requests.
+
+Goal:
+Use Clara AI answering agent to handle incoming service calls, capture customer details, and prioritize emergency electrical issues.
