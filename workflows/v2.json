@@ -1,0 +1,190 @@
+{
+  "name": "Onboarding Pipeline v2 (Onboarding Call → Agent Update)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "dataset_folder",
+              "value": "dataset/onboarding_calls"
+            },
+            {
+              "name": "pipeline_stage",
+              "value": "onboarding_v2_update"
+            },
+            {
+              "name": "description",
+              "value": "Process onboarding transcript and update agent configuration"
+            }
+          ]
+        }
+      },
+      "id": "prepare-config",
+      "name": "Prepare Onboarding Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "step",
+              "value": "load_existing_account"
+            },
+            {
+              "name": "operation",
+              "value": "load existing v1 memo and agent spec from outputs/accounts/<account_id>/v1"
+            }
+          ]
+        }
+      },
+      "id": "load-v1",
+      "name": "Load Existing v1 Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "step",
+              "value": "extract_updates"
+            },
+            {
+              "name": "operation",
+              "value": "extract business_hours, routing rules, emergency definitions from onboarding call"
+            }
+          ]
+        }
+      },
+      "id": "extract-update",
+      "name": "Extract Onboarding Updates",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [950, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "step",
+              "value": "merge_updates"
+            },
+            {
+              "name": "operation",
+              "value": "apply updates to existing account memo without overwriting unrelated fields"
+            }
+          ]
+        }
+      },
+      "id": "merge-data",
+      "name": "Merge Updates into Memo",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1200, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "step",
+              "value": "generate_agent_spec_v2"
+            },
+            {
+              "name": "operation",
+              "value": "generate updated Retell Agent Draft configuration version v2"
+            }
+          ]
+        }
+      },
+      "id": "generate-agent",
+      "name": "Generate Agent Spec v2",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1450, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "storage",
+              "value": "outputs/accounts/<account_id>/v2"
+            },
+            {
+              "name": "artifacts",
+              "value": "updated memo.json + updated agent_spec.json"
+            }
+          ]
+        }
+      },
+      "id": "store-v2",
+      "name": "Store v2 Outputs",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1700, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "step",
+              "value": "generate_changelog"
+            },
+            {
+              "name": "operation",
+              "value": "record differences between v1 and v2 in changes.md"
+            }
+          ]
+        }
+      },
+      "id": "create-changelog",
+      "name": "Create Change Log",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1950, 300]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [[{ "node": "Prepare Onboarding Config", "type": "main", "index": 0 }]]
+    },
+    "Prepare Onboarding Config": {
+      "main": [[{ "node": "Load Existing v1 Data", "type": "main", "index": 0 }]]
+    },
+    "Load Existing v1 Data": {
+      "main": [[{ "node": "Extract Onboarding Updates", "type": "main", "index": 0 }]]
+    },
+    "Extract Onboarding Updates": {
+      "main": [[{ "node": "Merge Updates into Memo", "type": "main", "index": 0 }]]
+    },
+    "Merge Updates into Memo": {
+      "main": [[{ "node": "Generate Agent Spec v2", "type": "main", "index": 0 }]]
+    },
+    "Generate Agent Spec v2": {
+      "main": [[{ "node": "Store v2 Outputs", "type": "main", "index": 0 }]]
+    },
+    "Store v2 Outputs": {
+      "main": [[{ "node": "Create Change Log", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1"
+}

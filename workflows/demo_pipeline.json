@@ -1,0 +1,162 @@
+{
+  "name": "Demo Pipeline v1 (Demo Call → Preliminary Agent)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "dataset_folder",
+              "value": "dataset/demo_calls"
+            },
+            {
+              "name": "pipeline_stage",
+              "value": "demo_v1_generation"
+            },
+            {
+              "name": "description",
+              "value": "Process demo transcript and generate preliminary agent spec"
+            }
+          ]
+        }
+      },
+      "id": "prepare-config",
+      "name": "Prepare Pipeline Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "step",
+              "value": "normalize_transcript"
+            },
+            {
+              "name": "operation",
+              "value": "load transcript file and assign account_id"
+            }
+          ]
+        }
+      },
+      "id": "normalize-step",
+      "name": "Normalize Transcript",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "step",
+              "value": "extract_account_memo"
+            },
+            {
+              "name": "operation",
+              "value": "extract company_name, services_supported, emergency_definition, routing rules"
+            }
+          ]
+        }
+      },
+      "id": "extract-step",
+      "name": "Extract Account Memo JSON",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [950, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "step",
+              "value": "generate_agent_spec"
+            },
+            {
+              "name": "operation",
+              "value": "generate Retell Agent Draft configuration v1"
+            }
+          ]
+        }
+      },
+      "id": "agent-step",
+      "name": "Generate Agent Spec v1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1200, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "storage",
+              "value": "outputs/accounts/<account_id>/v1"
+            },
+            {
+              "name": "artifacts",
+              "value": "memo.json + agent_spec.json"
+            }
+          ]
+        }
+      },
+      "id": "store-output",
+      "name": "Store Outputs",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1450, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "tracker",
+              "value": "create task item for account onboarding follow-up"
+            }
+          ]
+        }
+      },
+      "id": "create-task",
+      "name": "Create Task Tracker Item",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [1700, 300]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [[{ "node": "Prepare Pipeline Config", "type": "main", "index": 0 }]]
+    },
+    "Prepare Pipeline Config": {
+      "main": [[{ "node": "Normalize Transcript", "type": "main", "index": 0 }]]
+    },
+    "Normalize Transcript": {
+      "main": [[{ "node": "Extract Account Memo JSON", "type": "main", "index": 0 }]]
+    },
+    "Extract Account Memo JSON": {
+      "main": [[{ "node": "Generate Agent Spec v1", "type": "main", "index": 0 }]]
+    },
+    "Generate Agent Spec v1": {
+      "main": [[{ "node": "Store Outputs", "type": "main", "index": 0 }]]
+    },
+    "Store Outputs": {
+      "main": [[{ "node": "Create Task Tracker Item", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1"
+}

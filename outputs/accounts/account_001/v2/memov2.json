@@ -1,0 +1,28 @@
+{
+  "account_id": "account_001",
+  "company_name": "ABC Fire Protection",
+  "business_hours": {
+    "days": "Monday-Friday",
+    "start": "8:00",
+    "end": "17:00",
+    "timezone": "America/Chicago"
+  },
+  "office_address": "Austin, Texas",
+  "services_supported": [
+    "sprinkler repair",
+    "fire alarm inspection"
+  ],
+  "emergency_definition": [
+    "sprinkler leaks",
+    "broken sprinkler heads"
+  ],
+  "emergency_routing_rules": "transfer immediately to on-call technician",
+  "non_emergency_routing_rules": "collect caller details and schedule next business day service",
+  "call_transfer_rules": "transfer within 30 seconds if technician available",
+  "integration_constraints": [],
+  "after_hours_flow_summary": "confirm emergency, collect name, number and address, attempt transfer",
+  "office_hours_flow_summary": "greet caller, collect issue details, transfer to technician if emergency",
+  "questions_or_unknowns": [],
+  "notes": "Updated configuration based on onboarding call",
+  "version": "v2"
+}

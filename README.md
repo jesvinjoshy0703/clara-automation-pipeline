@@ -4,34 +4,31 @@ This project simulates an AI-powered automation pipeline that processes commerci
 
 ## Features
 
-- Processes demo call transcripts
-- Extracts business information
-- Generates onboarding accounts
-- Supports workflow automation using n8n
-- Structured automation pipeline in Python
+* Processes demo call transcripts
+* Extracts business information
+* Generates onboarding accounts
+* Supports workflow automation using n8n
+* Structured automation pipeline in Python
 
 ## Project Structure
 
 dataset/
-demo_calls/
-onboarding_calls/
+demo\_calls/
+onboarding\_calls/
 
 scripts/
-run_demo_pipeline.py
+run\_demo\_pipeline.py
 
 outputs/
 accounts/
 
-n8n_data/
+n8n\_data/
 
 docker-compose.yml
 
-## How to Run
-
-python scripts/run_demo_pipeline.py
-
 ## Technologies Used
 
-Python  
+json
 n8n Workflow Automation  
 Docker
+
